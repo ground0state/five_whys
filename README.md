@@ -1,5 +1,7 @@
 # five_whys
 
+![image](images/image.png)
+
 ## 使い方
 
 ```console

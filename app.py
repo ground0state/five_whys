@@ -89,7 +89,8 @@ def main():
             try:
                 # OpenAI APIを呼び出し
                 response = openai.chat.completions.create(
-                    model="gpt-4o-mini", messages=messages
+                    model="gpt-4o",  # gpt-4o-miniだとプロンプトの内容をあまり理解できない
+                    messages=messages
                 )
                 # APIの応答を取得
                 assistant_message = response.choices[0].message.content

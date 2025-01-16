@@ -1,5 +1,7 @@
 import streamlit as st
 import openai
+from streamlit_local_storage import LocalStorage
+
 
 # システムプロンプト
 SYSTEM_PROMPT = """
@@ -27,11 +29,20 @@ SYSTEM_PROMPT = """
 ・私は課題の深堀や対策の深堀をしていき、疲れていきます。そこであなたは、私を励ますように優しい文章にすることを心がけてください。
 """
 
+def LocalStorageManager():
+    return LocalStorage()
+local_storage = LocalStorageManager()
+
 with st.sidebar:
+    openai_api_key = local_storage.getItem("openai-api-key")
+    if openai_api_key is None:
+        openai_api_key = ""
+
     openai_api_key = st.text_input(
-        "OpenAI API Key", key="chatbot_api_key", type="password"
+        "OpenAI API Key", key="chatbot_api_key", type="password", value=openai_api_key
     )
     st.write("[Get an OpenAI API key](https://platform.openai.com/account/api-keys)")
+    local_storage.setItem("openai-api-key", openai_api_key)
 
 
 # 過去のチャット履歴を保持する関数

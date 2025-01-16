@@ -29,8 +29,11 @@ SYSTEM_PROMPT = """
 ・私は課題の深堀や対策の深堀をしていき、疲れていきます。そこであなたは、私を励ますように優しい文章にすることを心がけてください。
 """
 
+
 def LocalStorageManager():
     return LocalStorage()
+
+
 local_storage = LocalStorageManager()
 
 with st.sidebar:
@@ -101,7 +104,7 @@ def main():
                 # OpenAI APIを呼び出し
                 response = openai.chat.completions.create(
                     model="gpt-4o",  # gpt-4o-miniだとプロンプトの内容をあまり理解できない
-                    messages=messages
+                    messages=messages,
                 )
                 # APIの応答を取得
                 assistant_message = response.choices[0].message.content
